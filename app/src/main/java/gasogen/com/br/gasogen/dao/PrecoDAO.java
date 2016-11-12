@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gasogen.com.br.gasogen.modelo.Preco;
+import gasogen.com.br.gasogen.util.DataUtil;
 
 /**
  * Created by Dell on 11/11/2016.
@@ -19,10 +20,13 @@ public class PrecoDAO extends SQLiteOpenHelper {
     private static final int VERSAO = 0;
     private static final String TABELA = "Preco";
     private static final String DATABASE = "GasoGen";
+    private Context context;
 
     public PrecoDAO(Context context) {
         super(context, TABELA, null, VERSAO);
+        context = context;
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TABELA +
@@ -55,29 +59,26 @@ public class PrecoDAO extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put("valor", preco.getValor());
-        values.put("data", preco.getData());
+        values.put("id_posto", preco.getPosto().getId());
 
         getWritableDatabase().insert(TABELA, null, values);
     }
 
-    public List<Aluno> getAlunos() {
-        List<Aluno> alunos = new ArrayList<>();
+    public List<Preco> getPrecos() {
+        List<Preco> precos = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM alunos;", null);
+        Cursor c = db.rawQuery("SELECT * FROM "+TABELA+";", null);
 
         try {
             while (c.moveToNext()) {
-                Aluno aluno = new Aluno();
+                Preco preco = new Preco();
 
-                aluno.setId(c.getLong(c.getColumnIndex("id")));
-                aluno.setNome(c.getString(c.getColumnIndex("nome")));
-                aluno.setTelefone(c.getString(c.getColumnIndex("telefone")));
-                aluno.setEndereco(c.getString(c.getColumnIndex("endereco")));
-                aluno.setSite(c.getString(c.getColumnIndex("site")));
-                aluno.setNota(c.getDouble(c.getColumnIndex("nota")));
-                aluno.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
+                preco.setId(c.getLong(c.getColumnIndex("id")));
+                preco.setValor(c.getDouble(c.getColumnIndex("valor")));
+                preco.setData(DataUtil.getDateTime(c.getString(c.getColumnIndex("data"))));
+                preco.setPosto(new PostoDAO(this.context).getPosto(c.getLong(c.getColumnIndex("id_posto"))));
 
-                alunos.add(aluno);
+                precos.add(preco);
             }
         } finally {
             if (c != null) {
@@ -85,44 +86,33 @@ public class PrecoDAO extends SQLiteOpenHelper {
             }
         }
 
-        return alunos;
+        return precos;
     }
 
-    public void deletar(Aluno aluno) {
-        String[] param = {aluno.getId().toString()};
+    public void deletar(Preco preco) {
+        String[] param = {preco.getId().toString()};
         getWritableDatabase().delete(TABELA, "id=?", param);
     }
 
-    private void edita(Aluno aluno) {
+    private void edita(Preco preco) {
         ContentValues values = new ContentValues();
-        String[] param = {aluno.getId().toString()};
+        String[] param = {preco.getId().toString()};
 
-        values.put("nome", aluno.getNome());
-        values.put("telefone", aluno.getTelefone());
-        values.put("endereco", aluno.getEndereco());
-        values.put("site", aluno.getSite());
-        values.put("nota", aluno.getNota());
-        values.put("caminhoFoto", aluno.getCaminhoFoto());
+        values.put("valor", preco.getValor());
+        values.put("data", DataUtil.getDateTime(preco.getData()));
+        values.put("id_posto", preco.getPosto().getId());
+        // Editar o posto
 
         getWritableDatabase().update(TABELA, values, "id=?", param);
     }
 
-    public void insereOuAtualiza(Aluno aluno) {
-        if (aluno != null) {
-            if (aluno.getId() == null) {
-                insere(aluno);
+    public void insereOuAtualiza(Preco preco) {
+        if (preco != null) {
+            if (preco.getId() == null) {
+                insere(preco);
             } else {
-                edita(aluno);
+                edita(preco);
             }
         }
-    }
-
-    //+557197238843 - telefone de Marcio
-    public boolean existsTelefone(String telefone) {
-        Cursor c = getReadableDatabase().rawQuery("SELECT 1 FROM " + TABELA + " WHERE telefone = ?", new String[]{telefone});
-        boolean resultado = c.getCount() > 0;
-        c.close();
-
-        return resultado;
     }
 }

@@ -15,6 +15,10 @@ public class Preco implements Serializable {
     private Date data;
     private Posto posto;
 
+    public Preco() {
+
+    }
+
     public Preco(Long id, Double valor, Date data, Posto posto) {
         this.id = id;
         this.valor = valor;

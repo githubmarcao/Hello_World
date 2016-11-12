@@ -89,12 +89,34 @@ public class PostoDAO extends SQLiteOpenHelper {
         return postos;
     }
 
+    public Posto getPosto(Long id) {
+        Posto posto = new Posto();
+        SQLiteDatabase db = getReadableDatabase();
+        String[] param = {id.toString()};
+        Cursor c = db.rawQuery("SELECT * FROM "+TABELA+" WHERE id=?;", param);
+
+        try {
+            if (c.moveToNext()) {
+                posto.setId(c.getLong(c.getColumnIndex("id")));
+                posto.setNome(c.getString(c.getColumnIndex("nome")));
+                posto.setDescricao(c.getString(c.getColumnIndex("descricao")));
+                posto.setLatitude(c.getLong(c.getColumnIndex("latitude")));
+                posto.setLongitude(c.getLong(c.getColumnIndex("longitude")));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+        }
+        return posto;
+    }
+
     public void deletar(Posto posto) {
         String[] param = {posto.getId().toString()};
         getWritableDatabase().delete(TABELA, "id=?", param);
     }
 
-    private void edita(Posto posto) {
+    private void editar(Posto posto) {
         ContentValues values = new ContentValues();
         String[] param = {posto.getId().toString()};
 
@@ -111,7 +133,7 @@ public class PostoDAO extends SQLiteOpenHelper {
             if (posto.getId() == null) {
                 insere(posto);
             } else {
-                edita(posto);
+                editar(posto);
             }
         }
     }
