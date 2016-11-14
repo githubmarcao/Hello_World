@@ -102,6 +102,7 @@ public class PrecoDAO extends SQLiteOpenHelper {
         values.put("data", DataUtil.getDateTime(preco.getData()));
         values.put("id_posto", preco.getPosto().getId());
         // Editar o posto
+        (new PostoDAO(this.context)).insereOuAtualiza(preco.getPosto());
 
         getWritableDatabase().update(TABELA, values, "id=?", param);
     }

@@ -32,6 +32,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import gasogen.com.br.gasogen.dao.UsuarioDAO;
+import gasogen.com.br.gasogen.modelo.Usuario;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -294,7 +297,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, Usuario> {
 
         private final String mEmail;
         private final String mPassword;
@@ -305,34 +308,40 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+        protected Usuario doInBackground(Void... params) {
+            // Verificar se o usuario existe na base de dados
+            UsuarioDAO usuarioDAO = new UsuarioDAO(getApplicationContext());
+            Usuario usuario = usuarioDAO.getUsuarioAutenticacao(mEmail, mPassword);
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
+            return usuario;
+//            // TODO: attempt authentication against a network service.
+//
+//            try {
+//                // Simulate network access.
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                return false;
+//            }
+//
+//            for (String credential : DUMMY_CREDENTIALS) {
+//                String[] pieces = credential.split(":");
+//                if (pieces[0].equals(mEmail)) {
+//                    // Account exists, return true if the password matches.
+//                    return pieces[1].equals(mPassword);
+//                }
+//            }
+//
+//            // TODO: register the new account here.
+//            return true;
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final Usuario usuario) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
+            if (usuario != null) {
+                // TODO Enviar para 1 tela do programa
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
