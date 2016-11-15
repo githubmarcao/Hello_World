@@ -1,6 +1,7 @@
 package gasogen.com.br.gasogen.adapter;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -56,9 +57,10 @@ public class ListaPrecosAdapter extends BaseAdapter {
 
         // Zebrar a lista
         if (position % 2 == 0) {
-            view.setBackgroundColor(activity.getResources().getColor(R.color.linha_par));
+            view.setBackgroundColor(ContextCompat.getColor(activity, R.color.linha_par));
         } else {
-            view.setBackgroundColor(activity.getResources().getColor(R.color.linha_impar));
+            //view.setBackgroundColor(activity.getResources().getColor(R.color.linha_impar));
+            view.setBackgroundColor(ContextCompat.getColor(activity, R.color.linha_impar));
         }
 
         return view;

@@ -36,9 +36,9 @@ public class ListaPrecosActivity extends AppCompatActivity {
         botaoAdiciona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
+                Intent intent = new Intent(ListaPrecosActivity.this, PrecoActivity.class);
                 startActivity(intent);
-            
+            }
         });
 
     }
