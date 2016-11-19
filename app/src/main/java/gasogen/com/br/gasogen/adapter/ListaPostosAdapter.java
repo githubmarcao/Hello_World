@@ -10,50 +10,53 @@ import android.widget.TextView;
 import java.util.List;
 
 import gasogen.com.br.gasogen.R;
-import gasogen.com.br.gasogen.modelo.Preco;
+import gasogen.com.br.gasogen.modelo.Posto;
 
 /**
  * Created by Dell on 14/11/2016.
  */
 
-public class ListaPrecosAdapter extends BaseAdapter {
+public class ListaPostosAdapter extends BaseAdapter {
 
-    private final List<Preco> precos;
+    private final List<Posto> postos;
     private final Activity activity;
 
-    public ListaPrecosAdapter(Activity activity, List<Preco> precos) {
-        this.precos = precos;
+    public ListaPostosAdapter(Activity activity, List<Posto> postos) {
+        this.postos = postos;
         this.activity = activity;
     }
 
     @Override
     public int getCount() {
-        return precos.size();
+        return postos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return precos.get(position);
+        return postos.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return precos.get(position).getId();
+        return postos.get(position).getId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = activity.getLayoutInflater().inflate(R.layout.item_preco, parent, false);
-        Preco preco = this.precos.get(position);
+        View view = activity.getLayoutInflater().inflate(R.layout.item_posto, parent, false);
+        Posto posto = this.postos.get(position);
 
-        TextView campoPosto = (TextView) view.findViewById(R.id.item_preco_posto);
-        campoPosto.setText(preco.getPosto().getNome());
+        TextView campoNome = (TextView) view.findViewById(R.id.item_posto_nome);
+        campoNome.setText(posto.getNome());
 
-        TextView campoValor = (TextView) view.findViewById(R.id.item_preco_valor);
-        campoValor.setText(preco.getValor().toString());
+        TextView campoDescricao = (TextView) view.findViewById(R.id.item_posto_descricao);
+        campoDescricao.setText(posto.getDescricao().toString());
 
-        TextView campoData = (TextView) view.findViewById(R.id.item_preco_data);
-        campoData.setText(preco.getData().toString());
+        TextView campoLatitude = (TextView) view.findViewById(R.id.item_posto_latitude);
+        campoLatitude.setText(posto.getLatitude().toString());
+
+        TextView campoLongitude = (TextView) view.findViewById(R.id.item_posto_longitude);
+        campoLongitude.setText(posto.getLongitude().toString());
 
         // Zebrar a lista
         if (position % 2 == 0) {

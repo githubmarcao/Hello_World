@@ -30,17 +30,17 @@ public final class Criptografia {
     private static int pswdIterations = 2;
     private static int keySize = 128;//256;
 
-//    public static void main(String args[]) {
-//        try {
-//            String encrip = Criptografia.encrypt("1", "maria");
-//            System.out.println(encrip);
-//            String decrip = Criptografia.decrypt("1", encrip);
-//            System.out.println(decrip);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public static void main(String args[]) {
+        try {
+            String encrip = Criptografia.encrypt("1234", "maria");
+            System.out.println(encrip);
+            String decrip = Criptografia.decrypt(encrip, "maria");
+            System.out.println(decrip);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static String encrypt(String plainText, String password) throws
             NoSuchAlgorithmException,
@@ -67,7 +67,7 @@ public final class Criptografia {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, secret, new IvParameterSpec(ivBytes));
         byte[] encryptedTextBytes = cipher.doFinal(plainText.getBytes("UTF-8"));
-        return Base64.encodeToString(encryptedTextBytes, 0);
+        return Base64.encodeToString(encryptedTextBytes, Base64.DEFAULT);
     }
 
     public static String decrypt(String encryptedText, String password) throws
@@ -79,7 +79,7 @@ public final class Criptografia {
             UnsupportedEncodingException {
         byte[] saltBytes = SALT.getBytes("UTF-8");
         byte[] ivBytes = INICIALIZATION_VETOR.getBytes("UTF-8");
-        byte[] encryptedTextBytes = Base64.decode(encryptedText, 0);
+        byte[] encryptedTextBytes = Base64.decode(encryptedText, Base64.DEFAULT);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         PBEKeySpec spec = new PBEKeySpec(
                 password.toCharArray(),

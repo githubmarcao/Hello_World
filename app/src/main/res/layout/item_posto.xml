@@ -14,7 +14,7 @@
         android:layout_marginLeft="10dp">
 
         <TextView
-            android:id="@+id/item_posto"
+            android:id="@+id/item_posto_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"
@@ -22,14 +22,21 @@
             android:maxLength="20"/>
 
         <TextView
-            android:id="@+id/item_valor"
+            android:id="@+id/item_posto_descricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"
             android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/item_data"
+            android:id="@+id/item_posto_latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/item_posto_longitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"

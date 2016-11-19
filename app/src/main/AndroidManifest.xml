@@ -23,7 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListaPrecosActivity" />
-        <activity android:name=".PrecoActivity"></activity>
+        <activity android:name=".PrecoActivity" />
+        <activity android:name=".PostoActivity" />
+        <activity android:name=".ListaPostosActivity"></activity>
     </application>
 
 </manifest>
