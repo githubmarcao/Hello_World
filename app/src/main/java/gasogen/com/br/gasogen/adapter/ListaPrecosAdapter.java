@@ -5,7 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import java.util.List;
 
@@ -46,13 +46,13 @@ public class ListaPrecosAdapter extends BaseAdapter {
         View view = activity.getLayoutInflater().inflate(R.layout.item_preco, parent, false);
         Preco preco = this.precos.get(position);
 
-        TextView campoPosto = (TextView) view.findViewById(R.id.item_preco_posto);
+        EditText campoPosto = (EditText) view.findViewById(R.id.item_preco_posto);
         campoPosto.setText(preco.getPosto().getNome());
 
-        TextView campoValor = (TextView) view.findViewById(R.id.item_preco_valor);
+        EditText campoValor = (EditText) view.findViewById(R.id.item_preco_valor);
         campoValor.setText(preco.getValor().toString());
 
-        TextView campoData = (TextView) view.findViewById(R.id.item_preco_data);
+        EditText campoData = (EditText) view.findViewById(R.id.item_preco_data);
         campoData.setText(preco.getData().toString());
 
         // Zebrar a lista

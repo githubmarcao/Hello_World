@@ -17,7 +17,6 @@ public class ListaPrecosActivity extends AppCompatActivity {
 
     private ListView listaPrecos;
     private List<Preco> precos;
-    private static final String PRECO_SELECIONADO = "precoSelecionado";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
