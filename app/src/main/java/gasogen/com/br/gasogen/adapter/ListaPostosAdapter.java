@@ -5,7 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -46,16 +46,16 @@ public class ListaPostosAdapter extends BaseAdapter {
         View view = activity.getLayoutInflater().inflate(R.layout.item_posto, parent, false);
         Posto posto = this.postos.get(position);
 
-        EditText campoNome = (EditText) view.findViewById(R.id.item_posto_nome);
+        TextView campoNome = (TextView) view.findViewById(R.id.item_posto_nome);
         campoNome.setText(posto.getNome());
 
-        EditText campoDescricao = (EditText) view.findViewById(R.id.item_posto_descricao);
+        TextView campoDescricao = (TextView) view.findViewById(R.id.item_posto_descricao);
         campoDescricao.setText(posto.getDescricao().toString());
 
-        EditText campoLatitude = (EditText) view.findViewById(R.id.item_posto_latitude);
+        TextView campoLatitude = (TextView) view.findViewById(R.id.item_posto_latitude);
         campoLatitude.setText(posto.getLatitude().toString());
 
-        EditText campoLongitude = (EditText) view.findViewById(R.id.item_posto_longitude);
+        TextView campoLongitude = (TextView) view.findViewById(R.id.item_posto_longitude);
         campoLongitude.setText(posto.getLongitude().toString());
 
         // Zebrar a lista

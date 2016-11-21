@@ -56,6 +56,5 @@ public class PostoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }

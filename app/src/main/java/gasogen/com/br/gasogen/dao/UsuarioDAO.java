@@ -132,6 +132,14 @@ public class UsuarioDAO extends SQLiteOpenHelper {
                 c.close();
             }
         }
+
+        usuario.setId(1l);
+        usuario.setLogin("a@a");
+        usuario.setSenha("123456");
+        usuario.setNome("Marco");
+        usuario.setEmail("a@a");
+        usuario.setTelefone("1");
+
         return usuario;
     }
 

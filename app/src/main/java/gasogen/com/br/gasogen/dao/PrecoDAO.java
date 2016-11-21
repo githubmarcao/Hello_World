@@ -17,7 +17,7 @@ import gasogen.com.br.gasogen.util.DataUtil;
  */
 public class PrecoDAO extends SQLiteOpenHelper {
 
-    private static final int VERSAO = 0;
+    private static final int VERSAO = 1;
     private static final String TABELA = "Preco";
     private static final String DATABASE = "GasoGen";
     private Context context;
@@ -76,7 +76,7 @@ public class PrecoDAO extends SQLiteOpenHelper {
                 preco.setId(c.getLong(c.getColumnIndex("id")));
                 preco.setValor(c.getDouble(c.getColumnIndex("valor")));
                 preco.setData(DataUtil.getDateTime(c.getString(c.getColumnIndex("data"))));
-                preco.setPosto(new PostoDAO(this.context).getPosto(c.getLong(c.getColumnIndex("id_posto"))));
+                preco.setPosto(new PostoDAO(this.context).get(c.getLong(c.getColumnIndex("id_posto"))));
 
                 precos.add(preco);
             }

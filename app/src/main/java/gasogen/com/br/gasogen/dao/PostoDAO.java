@@ -16,7 +16,7 @@ import gasogen.com.br.gasogen.modelo.Posto;
  */
 public class PostoDAO extends SQLiteOpenHelper {
 
-    private static final int VERSAO = 0;
+    private static final int VERSAO = 1;
     private static final String TABELA = "Posto";
     private static final String DATABASE = "GasoGen";
 
@@ -89,7 +89,7 @@ public class PostoDAO extends SQLiteOpenHelper {
         return postos;
     }
 
-    public Posto getPosto(Long id) {
+    public Posto get(Long id) {
         Posto posto = new Posto();
         SQLiteDatabase db = getReadableDatabase();
         String[] param = {id.toString()};

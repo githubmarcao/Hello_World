@@ -30,17 +30,17 @@ public final class Criptografia {
     private static int pswdIterations = 2;
     private static int keySize = 128;//256;
 
-    public static void main(String args[]) {
-        try {
-            String encrip = Criptografia.encrypt("1234", "maria");
-            System.out.println(encrip);
-            String decrip = Criptografia.decrypt(encrip, "maria");
-            System.out.println(decrip);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String args[]) {
+//        try {
+//            String encrip = Criptografia.encrypt("1234", "maria");
+//            System.out.println(encrip);
+//            String decrip = Criptografia.decrypt(encrip, "maria");
+//            System.out.println(decrip);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static String encrypt(String plainText, String password) throws
             NoSuchAlgorithmException,

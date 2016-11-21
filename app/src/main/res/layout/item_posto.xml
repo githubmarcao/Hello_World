@@ -1,53 +1,38 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_fundo"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="100dp"
+    android:gravity="left"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/item_fundo"
+    <TextView
+        android:id="@+id/item_posto_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="vertical">
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:maxLength="20"/>
 
-        <EditText
-            android:id="@+id/item_posto_nome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/nome"
-            android:inputType="textCapWords"/>
+    <TextView
+        android:id="@+id/item_posto_descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:maxLength="20" />
 
-        <EditText
-            android:id="@+id/item_posto_descricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/descricao"
-            android:inputType="textCapWords"/>
+    <TextView
+        android:id="@+id/item_posto_latitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="20sp"/>
 
-        <EditText
-            android:id="@+id/item_posto_latitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/latitude"
-            android:inputType="textCapWords"
-            android:digits="true"/>
-
-        <EditText
-            android:id="@+id/item_posto_longitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/longitude"
-            android:inputType="textCapWords"
-            android:digits="true"/>
-
-        <Button
-            android:id="@+id/item_posto_botao_salvar"
-            android:text="@string/salvar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-</ScrollView>
+    <TextView
+        android:id="@+id/item_posto_longitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="20sp"/>
+</LinearLayout>
