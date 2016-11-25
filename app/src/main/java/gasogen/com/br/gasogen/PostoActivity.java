@@ -43,13 +43,27 @@ public class PostoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 posto.setNome(((EditText) findViewById(R.id.item_posto_nome)).getText().toString());
                 posto.setDescricao(((EditText) findViewById(R.id.item_posto_descricao)).getText().toString());
-                posto.setLatitude(Long.getLong(((EditText) findViewById(R.id.item_posto_latitude)).getText().toString()));
-                posto.setLongitude(Long.getLong(((EditText) findViewById(R.id.item_posto_longitude)).getText().toString()));
+                String latitudeTexto = ((EditText) findViewById(R.id.item_posto_latitude)).getText().toString();
+                if ("".equals(latitudeTexto)) {
+                    posto.setLatitude(0l);
+                } else {
+                    posto.setLatitude(Long.parseLong(latitudeTexto));
+                }
+                String longitudeTexto = ((EditText) findViewById(R.id.item_posto_longitude)).getText().toString();
+                if ("".equals(longitudeTexto)) {
+                    posto.setLongitude(0l);
+                } else {
+                    posto.setLongitude(Long.parseLong(longitudeTexto));
+                }
 
                 PostoDAO dao = new PostoDAO(PostoActivity.this);
                 dao.insereOuAtualiza(posto);
 
-                Toast.makeText(PostoActivity.this, "'" + posto.getNome() + "' inserido.", Toast.LENGTH_SHORT).show();
+                if (posto.getId() == null || posto.getId() == 0) {
+                    Toast.makeText(PostoActivity.this, "'" + posto.getNome() + "' inserido.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PostoActivity.this, "'" + posto.getNome() + "' editado.", Toast.LENGTH_SHORT).show();
+                }
                 dao.close();
 
                 Intent intent = new Intent(PostoActivity.this, ListaPostosActivity.class);
