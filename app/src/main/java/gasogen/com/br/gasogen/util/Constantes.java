@@ -5,6 +5,6 @@ package gasogen.com.br.gasogen.util;
  */
 
 public final class Constantes {
-    public final static String POSTO_SELECIONADO = "postoSelecionado";
-    private static final String PRECO_SELECIONADO = "precoSelecionado";
+    public static final String POSTO_SELECIONADO = "postoSelecionado";
+    public static final String PRECO_SELECIONADO = "precoSelecionado";
 }

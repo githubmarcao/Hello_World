@@ -18,5 +18,7 @@
     <string name="descricao">Descrição</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="data">Data</string>
+    <string name="valor">Valor</string>
 
 </resources>

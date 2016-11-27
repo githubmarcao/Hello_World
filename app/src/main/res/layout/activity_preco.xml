@@ -9,7 +9,15 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/item_preco"
+        layout="@layout/formulario_preco"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/include" />
+
+    <Button
+        android:id="@+id/item_preco_botao_salvar"
+        android:text="@string/salvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include" />
 </RelativeLayout>

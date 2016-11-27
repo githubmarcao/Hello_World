@@ -46,7 +46,7 @@ public class ListaPrecosAdapter extends BaseAdapter {
         View view = activity.getLayoutInflater().inflate(R.layout.item_preco, parent, false);
         Preco preco = this.precos.get(position);
 
-        EditText campoPosto = (EditText) view.findViewById(R.id.item_preco_posto);
+        EditText campoPosto = (EditText) view.findViewById(R.id.item_preco_lista_posto);
         campoPosto.setText(preco.getPosto().getNome());
 
         EditText campoValor = (EditText) view.findViewById(R.id.item_preco_valor);

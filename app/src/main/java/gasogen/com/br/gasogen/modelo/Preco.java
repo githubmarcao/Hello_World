@@ -1,7 +1,6 @@
 package gasogen.com.br.gasogen.modelo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -16,7 +15,7 @@ public class Preco implements Serializable {
     private Posto posto;
 
     public Preco() {
-
+        this.posto = new Posto();
     }
 
     public Preco(Long id, Double valor, Date data, Posto posto) {

@@ -22,17 +22,17 @@ public class PostoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_posto);
 
         Intent intent = getIntent();
-        posto = (Posto) intent.getSerializableExtra(Constantes.POSTO_SELECIONADO);
-        if (posto != null) {
+        this.posto = (Posto) intent.getSerializableExtra(Constantes.POSTO_SELECIONADO);
+        if (this.posto != null) {
             EditText nome = (EditText) findViewById(R.id.item_posto_nome);
             EditText descricao = (EditText) findViewById(R.id.item_posto_descricao);
             EditText latitude = (EditText) findViewById(R.id.item_posto_latitude);
             EditText longitude = (EditText) findViewById(R.id.item_posto_longitude);
             
-            nome.setText(posto.getNome());
-            descricao.setText(posto.getDescricao());
-            latitude.setText(posto.getLatitude().toString());
-            longitude.setText(posto.getLongitude().toString());
+            nome.setText(this.posto.getNome());
+            descricao.setText(this.posto.getDescricao());
+            latitude.setText(this.posto.getLatitude().toString());
+            longitude.setText(this.posto.getLongitude().toString());
         } else {
             this.posto = new Posto();
         }
@@ -56,6 +56,10 @@ public class PostoActivity extends AppCompatActivity {
                     posto.setLongitude(Long.parseLong(longitudeTexto));
                 }
 
+                if (!validaPosto(posto)) {
+                    return;
+                }
+
                 PostoDAO dao = new PostoDAO(PostoActivity.this);
                 dao.insereOuAtualiza(posto);
 
@@ -70,5 +74,13 @@ public class PostoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private boolean validaPosto(Posto posto) {
+        if (posto.getNome() == null || posto.getNome().isEmpty()) {
+            Toast.makeText(PostoActivity.this, "Digite o nome do posto para continuar.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }

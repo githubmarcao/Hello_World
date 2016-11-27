@@ -16,8 +16,8 @@ import gasogen.com.br.gasogen.modelo.Posto;
  */
 public class PostoDAO extends SQLiteOpenHelper {
 
-    private static final int VERSAO = 1;
-    private static final String TABELA = "Posto";
+    private static final int VERSAO = 2;
+    private static final String TABELA = "posto";
     private static final String DATABASE = "GasoGen";
 
     public PostoDAO(Context context) {
@@ -45,6 +45,7 @@ public class PostoDAO extends SQLiteOpenHelper {
             case 1:
                 //String sql = "ALTER TABLE " + TABELA + " ADD COLUMN caminhoFoto TEXT;";
                 //db.execSQL(sql);
+                db.execSQL("CREATE UNIQUE INDEX unique_name ON "+TABELA+"(nome);");
             case 2:
                 // E por ai vai..
             case 3:
@@ -85,7 +86,6 @@ public class PostoDAO extends SQLiteOpenHelper {
                 c.close();
             }
         }
-
         return postos;
     }
 

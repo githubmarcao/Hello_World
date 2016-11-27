@@ -18,7 +18,7 @@ import gasogen.com.br.gasogen.util.DataUtil;
 public class PrecoDAO extends SQLiteOpenHelper {
 
     private static final int VERSAO = 1;
-    private static final String TABELA = "Preco";
+    private static final String TABELA = "preco";
     private static final String DATABASE = "GasoGen";
     private Context context;
 
@@ -33,7 +33,8 @@ public class PrecoDAO extends SQLiteOpenHelper {
                 " (id INTEGER PRIMARY KEY," +
                 " valor REAL," +
                 " data DATETIME DEFAULT CURRENT_TIMESTAMP," +
-                " FOREIGN KEY(id_posto) REFERENCES Posto(id));";
+                " id_posto INTEGER," +
+                " FOREIGN KEY(id_posto) REFERENCES posto(id));";
 
         db.execSQL(sql);
     }
@@ -76,7 +77,11 @@ public class PrecoDAO extends SQLiteOpenHelper {
                 preco.setId(c.getLong(c.getColumnIndex("id")));
                 preco.setValor(c.getDouble(c.getColumnIndex("valor")));
                 preco.setData(DataUtil.getDateTime(c.getString(c.getColumnIndex("data"))));
-                preco.setPosto(new PostoDAO(this.context).get(c.getLong(c.getColumnIndex("id_posto"))));
+
+                // Obter o posto
+                PostoDAO dao = new PostoDAO(this.context);
+                preco.setPosto(dao.get(c.getLong(c.getColumnIndex("id_posto"))));
+                dao.close();
 
                 precos.add(preco);
             }
@@ -101,8 +106,11 @@ public class PrecoDAO extends SQLiteOpenHelper {
         values.put("valor", preco.getValor());
         values.put("data", DataUtil.getDateTime(preco.getData()));
         values.put("id_posto", preco.getPosto().getId());
+
         // Editar o posto
-        (new PostoDAO(this.context)).insereOuAtualiza(preco.getPosto());
+        PostoDAO dao = new PostoDAO(this.context);
+        dao.insereOuAtualiza(preco.getPosto());
+        dao.close();
 
         getWritableDatabase().update(TABELA, values, "id=?", param);
     }

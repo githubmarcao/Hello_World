@@ -65,4 +65,23 @@ public class Posto implements Serializable {
     public void setLongitude(Long longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Posto)) return false;
+
+        Posto posto = (Posto) o;
+
+        if (id != null ? !id.equals(posto.id) : posto.id != null) return false;
+        return nome.equals(posto.nome);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + nome.hashCode();
+        return result;
+    }
 }
