@@ -27,10 +27,13 @@
             android:maxLength="10"
             android:hint="@string/data"/>
 
-        <ListView
-            android:id="@+id/item_preco_lista_posto"
+        <Spinner
+            android:id="@+id/item_preco_lista_posto1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btn_add"
+            android:layout_marginTop="23dp"
             />
     </LinearLayout>
 </ScrollView>

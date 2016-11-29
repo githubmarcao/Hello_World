@@ -84,4 +84,9 @@ public class Posto implements Serializable {
         result = 31 * result + nome.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }

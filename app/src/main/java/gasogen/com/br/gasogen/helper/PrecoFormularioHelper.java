@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -31,7 +31,7 @@ public class PrecoFormularioHelper {
     private EditText valor;
     private EditText data;
     private EditText Posto;
-    private ListView listView;
+    private Spinner spinner;
     private PrecoActivity activity;
 
     public PrecoFormularioHelper(PrecoActivity activity, List<Posto> postos) {
@@ -52,47 +52,83 @@ public class PrecoFormularioHelper {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals(current)) {
-                    String clean = s.toString().replaceAll("[^\\d.]", "");
-                    String cleanC = current.replaceAll("[^\\d.]", "");
+//                if (!s.toString().equals(current)) {
+//                    String clean = s.toString().replaceAll("[^\\d.]", "");
+//                    String cleanC = current.replaceAll("[^\\d.]", "");
+//
+//                    int cl = clean.length();
+//                    int sel = cl;
+//                    for (int i = 2; i <= cl && i < 6; i += 2) {
+//                        sel++;
+//                    }
+//                    //Fix for pressing delete next to a forward slash
+//                    if (clean.equals(cleanC)) sel--;
+//
+//                    if (clean.length() < 8){
+//                        clean = clean + ddmmyyyy.substring(clean.length());
+//                    }else{
+//                        //This part makes sure that when we finish entering numbers
+//                        //the date is correct, fixing it otherwise
+//                        int day  = Integer.parseInt(clean.substring(0,2));
+//                        int mon  = Integer.parseInt(clean.substring(2,4));
+//                        int year = Integer.parseInt(clean.substring(4,8));
+//
+//                        if(mon > 12) mon = 12;
+//                        cal.set(Calendar.MONTH, mon-1);
+//                        year = (year<1900)?1900:(year>2100)?2100:year;
+//                        cal.set(Calendar.YEAR, year);
+//                        // ^ first set year for the line below to work correctly
+//                        //with leap years - otherwise, date e.g. 29/02/2012
+//                        //would be automatically corrected to 28/02/2012
+//
+//                        day = (day > cal.getActualMaximum(Calendar.DATE))? cal.getActualMaximum(Calendar.DATE):day;
+//                        clean = String.format("%02d%02d%02d",day, mon, year);
+//                    }
+//
+//                    clean = String.format("%s/%s/%s", clean.substring(0, 2),
+//                            clean.substring(2, 4),
+//                            clean.substring(4, 8));
+//
+//                    sel = sel < 0 ? 0 : sel;
+//                    current = clean;
+//                    data.setText(current);
+//                    data.setSelection(sel < current.length() ? sel : current.length());
+//                }
 
-                    int cl = clean.length();
-                    int sel = cl;
-                    for (int i = 2; i <= cl && i < 6; i += 2) {
-                        sel++;
+                String working = s.toString();
+                boolean isValid = true;
+                if (working.length()==2 && before ==0) {
+                    if (Integer.parseInt(working) < 1 || Integer.parseInt(working) > 31) {
+                        isValid = false;
+                    } else {
+                        working+="/";
+                        data.setText(working);
+                        data.setSelection(working.length());
                     }
-                    //Fix for pressing delete next to a forward slash
-                    if (clean.equals(cleanC)) sel--;
-
-                    if (clean.length() < 8){
-                        clean = clean + ddmmyyyy.substring(clean.length());
-                    }else{
-                        //This part makes sure that when we finish entering numbers
-                        //the date is correct, fixing it otherwise
-                        int day  = Integer.parseInt(clean.substring(0,2));
-                        int mon  = Integer.parseInt(clean.substring(2,4));
-                        int year = Integer.parseInt(clean.substring(4,8));
-
-                        if(mon > 12) mon = 12;
-                        cal.set(Calendar.MONTH, mon-1);
-                        year = (year<1900)?1900:(year>2100)?2100:year;
-                        cal.set(Calendar.YEAR, year);
-                        // ^ first set year for the line below to work correctly
-                        //with leap years - otherwise, date e.g. 29/02/2012
-                        //would be automatically corrected to 28/02/2012
-
-                        day = (day > cal.getActualMaximum(Calendar.DATE))? cal.getActualMaximum(Calendar.DATE):day;
-                        clean = String.format("%02d%02d%02d",day, mon, year);
+                }
+                else if (working.length()==5 && before ==0) {
+                    String mes = working.substring(3);
+                    if (Integer.parseInt(mes) < 1 || Integer.parseInt(mes) > 12) {
+                        isValid = false;
+                    } else {
+                        working+="/";
+                        data.setText(working);
+                        data.setSelection(working.length());
                     }
+                }
+                else if (working.length()== 12 && before == 0) {
+                    String ano = working.substring(6);
+                    if (Integer.parseInt(ano) < 1500) {
+                        isValid = false;
+                    }
+                } else if (working.length() != 12) {
+                    isValid = false;
+                }
 
-                    clean = String.format("%s/%s/%s", clean.substring(0, 2),
-                            clean.substring(2, 4),
-                            clean.substring(4, 8));
-
-                    sel = sel < 0 ? 0 : sel;
-                    current = clean;
-                    data.setText(current);
-                    data.setSelection(sel < current.length() ? sel : current.length());
+                if (!isValid) {
+                    data.setError("Enter a valid date: DD/MM/YYYY");
+                } else {
+                    data.setError(null);
                 }
             }
 
@@ -101,35 +137,24 @@ public class PrecoFormularioHelper {
         };
         this.data.addTextChangedListener(tw);
 
-        String[] values = new String[] { "Android List View",
-                "Adapter implementation",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View"
-        };
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-//        PostoArrayAdapter adapter = new PostoArrayAdapter(activity, postos);
-        listView = (ListView) activity.findViewById(R.id.item_preco_lista_posto);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner = (Spinner) activity.findViewById(R.id.item_preco_lista_posto1);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //postoSelecionado = (Posto) listView.getItemAtPosition(position);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                postoSelecionado = (Posto) parent.getItemAtPosition(position);
+                String label = postoSelecionado.toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
+
+        ArrayAdapter<Posto> dataAdapter = new ArrayAdapter<Posto>
+                (activity, android.R.layout.simple_spinner_item, postos);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
     }
 
     public Preco getPreco(){
@@ -165,6 +190,6 @@ public class PrecoFormularioHelper {
                 break;
             }
         }
-        listView.setSelection(posicao);
+        spinner.setSelection(posicao);
     }
 }
