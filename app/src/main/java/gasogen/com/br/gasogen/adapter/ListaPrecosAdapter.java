@@ -5,12 +5,13 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
 import gasogen.com.br.gasogen.R;
 import gasogen.com.br.gasogen.modelo.Preco;
+import gasogen.com.br.gasogen.util.DataUtil;
 
 /**
  * Created by Dell on 14/11/2016.
@@ -46,14 +47,14 @@ public class ListaPrecosAdapter extends BaseAdapter {
         View view = activity.getLayoutInflater().inflate(R.layout.item_preco, parent, false);
         Preco preco = this.precos.get(position);
 
-        EditText campoPosto = (EditText) view.findViewById(R.id.item_preco_lista_posto);
+        TextView campoPosto = (TextView) view.findViewById(R.id.item_preco_posto);
         campoPosto.setText(preco.getPosto().getNome());
 
-        EditText campoValor = (EditText) view.findViewById(R.id.item_preco_valor);
+        TextView campoValor = (TextView) view.findViewById(R.id.item_preco_valor);
         campoValor.setText(preco.getValor().toString());
 
-        EditText campoData = (EditText) view.findViewById(R.id.item_preco_data);
-        campoData.setText(preco.getData().toString());
+        TextView campoData = (TextView) view.findViewById(R.id.item_preco_data);
+        campoData.setText(DataUtil.getDateTime(preco.getData()));
 
         // Zebrar a lista
         if (position % 2 == 0) {

@@ -67,6 +67,11 @@ public class PostoDAO extends SQLiteOpenHelper {
     public List<Posto> getPostos() {
         List<Posto> postos = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
+
+        if (db == null) {
+            return  postos;
+        }
+
         Cursor c = db.rawQuery("SELECT * FROM "+TABELA+";", null);
 
         try {
@@ -92,6 +97,11 @@ public class PostoDAO extends SQLiteOpenHelper {
     public Posto get(Long id) {
         Posto posto = new Posto();
         SQLiteDatabase db = getReadableDatabase();
+
+        if (db == null) {
+            return  posto;
+        }
+
         String[] param = {id.toString()};
         Cursor c = db.rawQuery("SELECT * FROM "+TABELA+" WHERE id=?;", param);
 

@@ -24,7 +24,7 @@ public class PrecoDAO extends SQLiteOpenHelper {
 
     public PrecoDAO(Context context) {
         super(context, TABELA, null, VERSAO);
-        context = context;
+        this.context = context;
     }
 
     @Override
@@ -68,6 +68,11 @@ public class PrecoDAO extends SQLiteOpenHelper {
     public List<Preco> getPrecos() {
         List<Preco> precos = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
+
+        if (db == null) {
+            return  precos;
+        }
+
         Cursor c = db.rawQuery("SELECT * FROM "+TABELA+";", null);
 
         try {
@@ -76,7 +81,7 @@ public class PrecoDAO extends SQLiteOpenHelper {
 
                 preco.setId(c.getLong(c.getColumnIndex("id")));
                 preco.setValor(c.getDouble(c.getColumnIndex("valor")));
-                preco.setData(DataUtil.getDateTime(c.getString(c.getColumnIndex("data"))));
+                preco.setData(DataUtil.getDateTimeVindaDoBanco(c.getString(c.getColumnIndex("data"))));
 
                 // Obter o posto
                 PostoDAO dao = new PostoDAO(this.context);
@@ -104,7 +109,7 @@ public class PrecoDAO extends SQLiteOpenHelper {
         String[] param = {preco.getId().toString()};
 
         values.put("valor", preco.getValor());
-        values.put("data", DataUtil.getDateTime(preco.getData()));
+        values.put("data", DataUtil.getDateTimeSalvarNoBanco(preco.getData()));
         values.put("id_posto", preco.getPosto().getId());
 
         // Editar o posto
