@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_usuario"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gasogen.com.br.gasogen.UsuarioActivity">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/formulario_usuario"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/include" />
+
+    <Button
+        android:id="@+id/item_usuario_botao_salvar"
+        android:text="@string/salvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include" />
+</RelativeLayout>

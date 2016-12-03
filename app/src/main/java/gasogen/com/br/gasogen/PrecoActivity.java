@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import gasogen.com.br.gasogen.dao.PostoDAO;
 import gasogen.com.br.gasogen.dao.PrecoDAO;
 import gasogen.com.br.gasogen.helper.PrecoFormularioHelper;
@@ -70,6 +72,9 @@ public class PrecoActivity extends AppCompatActivity {
         if (preco.getPosto() == null) {
             Toast.makeText(PrecoActivity.this, "Selecione um posto para continuar.", Toast.LENGTH_LONG).show();
             return false;
+        }
+        if (preco.getData() == null) {
+            preco.setData(new Date());
         }
         return true;
     }

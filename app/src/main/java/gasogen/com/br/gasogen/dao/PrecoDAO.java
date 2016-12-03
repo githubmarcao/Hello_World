@@ -42,9 +42,9 @@ public class PrecoDAO extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Nao fazer mais isso, isso era so para testarmos local
-//        String sql = "DROP TABLE IF EXITS " + TABELA;
-//        db.execSQL(sql);
-//        onCreate(db);
+        String sql = "DROP TABLE IF EXITS " + TABELA;
+        db.execSQL(sql);
+        onCreate(db);
         switch (oldVersion) {
             case 1:
 //                String sql = "ALTER TABLE " + TABELA + " ADD COLUMN caminhoFoto TEXT;";
@@ -60,6 +60,7 @@ public class PrecoDAO extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put("valor", preco.getValor());
+        values.put("data", DataUtil.getDateTimeSalvarNoBanco(preco.getData()));
         values.put("id_posto", preco.getPosto().getId());
 
         getWritableDatabase().insert(TABELA, null, values);

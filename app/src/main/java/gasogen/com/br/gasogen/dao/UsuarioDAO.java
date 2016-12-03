@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gasogen.com.br.gasogen.modelo.Usuario;
 
 /**
@@ -63,31 +66,32 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         getWritableDatabase().insert(TABELA, null, values);
     }
 
-//    public List<Posto> getPostos() {
-//        List<Posto> postos = new ArrayList<>();
-//        SQLiteDatabase db = getReadableDatabase();
-//        Cursor c = db.rawQuery("SELECT * FROM "+TABELA+";", null);
-//
-//        try {
-//            while (c.moveToNext()) {
-//                Posto posto = new Posto();
-//
-//                posto.setId(c.getLong(c.getColumnIndex("id")));
-//                posto.setNome(c.getString(c.getColumnIndex("nome")));
-//                posto.setDescricao(c.getString(c.getColumnIndex("descricao")));
-//                posto.setLatitude(c.getLong(c.getColumnIndex("latitude")));
-//                posto.setLongitude(c.getLong(c.getColumnIndex("longitude")));
-//
-//                postos.add(posto);
-//            }
-//        } finally {
-//            if (c != null) {
-//                c.close();
-//            }
-//        }
-//
-//        return postos;
-//    }
+    public List<Usuario> getUsuarios() {
+        List<Usuario> usuarios = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM "+TABELA+";", null);
+
+        try {
+            while (c.moveToNext()) {
+                Usuario usuario = new Usuario();
+
+                usuario.setId(c.getLong(c.getColumnIndex("id")));
+                usuario.setLogin(c.getString(c.getColumnIndex("login")));
+                usuario.setSenha(c.getString(c.getColumnIndex("senha")));
+                usuario.setNome(c.getString(c.getColumnIndex("nome")));
+                usuario.setEmail(c.getString(c.getColumnIndex("email")));
+                usuario.setTelefone(c.getString(c.getColumnIndex("telefone")));
+
+                usuarios.add(usuario);
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+        }
+
+        return usuarios;
+    }
 
     public Usuario getUsuario(Long id) {
         Usuario usuario = new Usuario();

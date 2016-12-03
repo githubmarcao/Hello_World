@@ -16,6 +16,7 @@ public class DataUtil {
     public static final String FORMATO_TELA = "dd-MM-yyyy HH:mm:ss";
     public static final String FORMATO_TELA_DATA = "dd/MM/yyyy";
 
+    // VER NA HORA DE SALVAR A DATA
     public static String getDateTime(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 FORMATO_TELA_DATA, Locale.getDefault());
@@ -35,23 +36,21 @@ public class DataUtil {
     public static Date getDateTime(String data) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 FORMATO_TELA_DATA, Locale.getDefault());
-        Date retorno = null;
         try {
-            retorno = (Date) dateFormat.parse(data);
+            return (Date) dateFormat.parse(data);
         } catch (Exception e) {
             Log.i("DataUtil", "Problema ao converter a data: " + data);
         }
-        return retorno;
+        return null;
     }
     public static Date getDateTimeVindaDoBanco(String data) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 FORMATO_BANCO_DE_DADOS, Locale.getDefault());
-        Date retorno = null;
         try {
-            retorno = (Date) dateFormat.parse(data);
+            return (Date) dateFormat.parse(data);
         } catch (Exception e) {
             Log.i("DataUtil", "Problema ao converter a data: " + data);
         }
-        return retorno;
+        return null;
     }
 }
