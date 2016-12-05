@@ -13,6 +13,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- Nome dos campos -->
     <string name="salvar">Salvar</string>
     <string name="nome">Nome</string>
     <string name="descricao">Descrição</string>
@@ -24,5 +26,13 @@
     <string name="email">Email</string>
     <string name="telefone">Telefone</string>
     <string name="valor">Valor</string>
+
+    <!-- Titulo das activity  -->
+    <string name="title_activity_lista_precos">Lista de Preços</string>
+    <string name="title_activity_lista_postos">Lista de Postos</string>
+    <string name="title_activity_lista_usuarios">Lista de Usuáios</string>
+    <string name="title_activity_preco">Preço</string>
+    <string name="title_activity_posto">Posto</string>
+    <string name="title_activity_usuario">Usuário</string>
 
 </resources>

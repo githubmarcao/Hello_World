@@ -4,7 +4,8 @@
     android:id="@+id/activity_lista_postos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="gasogen.com.br.gasogen.ListaPostosActivity">
+    tools:context="gasogen.com.br.gasogen.ListaPostosActivity"
+    >
 
     <ListView
         android:id="@+id/lista_postos"

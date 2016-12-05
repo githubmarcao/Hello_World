@@ -22,12 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListaPrecosActivity" />
-        <activity android:name=".ListaPostosActivity" />
-        <activity android:name=".ListaUsuariosActivity" />
-        <activity android:name=".PrecoActivity" />
-        <activity android:name=".PostoActivity" />
-        <activity android:name=".UsuarioActivity" />
+        <activity android:name=".ListaPrecosActivity" android:label="@string/title_activity_lista_precos" />
+        <activity android:name=".ListaPostosActivity" android:label="@string/title_activity_lista_postos" />
+        <activity android:name=".ListaUsuariosActivity" android:label="@string/title_activity_lista_usuarios" />
+        <activity android:name=".PrecoActivity" android:label="@string/title_activity_preco" />
+        <activity android:name=".PostoActivity" android:label="@string/title_activity_posto" />
+        <activity android:name=".UsuarioActivity" android:label="@string/title_activity_usuario" />
 
     </application>
 
