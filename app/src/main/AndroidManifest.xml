@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+    <!-- To access Google+ APIs: -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,13 +25,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListaPrecosActivity" android:label="@string/title_activity_lista_precos" />
-        <activity android:name=".ListaPostosActivity" android:label="@string/title_activity_lista_postos" />
-        <activity android:name=".ListaUsuariosActivity" android:label="@string/title_activity_lista_usuarios" />
-        <activity android:name=".PrecoActivity" android:label="@string/title_activity_preco" />
-        <activity android:name=".PostoActivity" android:label="@string/title_activity_posto" />
-        <activity android:name=".UsuarioActivity" android:label="@string/title_activity_usuario" />
-
+        <activity
+            android:name=".ListaPrecosActivity"
+            android:label="@string/title_activity_lista_precos" />
+        <activity
+            android:name=".ListaPostosActivity"
+            android:label="@string/title_activity_lista_postos" />
+        <activity
+            android:name=".ListaUsuariosActivity"
+            android:label="@string/title_activity_lista_usuarios" />
+        <activity
+            android:name=".PrecoActivity"
+            android:label="@string/title_activity_preco" />
+        <activity
+            android:name=".PostoActivity"
+            android:label="@string/title_activity_posto" />
+        <activity
+            android:name=".UsuarioActivity"
+            android:label="@string/title_activity_usuario" />
+        <activity
+            android:name=".DrawerActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

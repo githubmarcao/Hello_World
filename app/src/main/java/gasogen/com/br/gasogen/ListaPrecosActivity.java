@@ -2,9 +2,11 @@ package gasogen.com.br.gasogen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.List;
@@ -17,6 +19,12 @@ public class ListaPrecosActivity extends AppCompatActivity {
 
     private ListView listaPrecos;
     private List<Preco> precos;
+
+    // Drawer
+
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
